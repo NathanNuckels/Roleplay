@@ -9,8 +9,10 @@ Run main.py, then type "info rp" for some information.
     - [x] Place
     - [x] Character
     - [ ] Object
+	    - [ ] Sword
+	    - [ ] Gem
 - [ ] test 'c' command
     - [x] places
-    - [ ] characters
+    - [x] characters
     - [ ] objects
-- [ ] test 'move' command
+- [x] test 'move' command

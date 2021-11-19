@@ -31,7 +31,7 @@ while True:
 				for place in places:
 					if place.name==cmd[4]:
 						caracters.append(roleplay.Character(cmd[2],cmd[3],cmd[4]))
-						print("Created "+cmd[2].upper()+" the "+cmd[3].uppr()+" at "+cmd[4].uper())
+						print("Created "+cmd[2].upper()+" the "+cmd[3].upper()+" at "+cmd[4].upper())
 						foundPlace=True
 				if not foundPlace:
 					print("Place not found")
