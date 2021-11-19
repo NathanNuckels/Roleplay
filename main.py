@@ -28,7 +28,8 @@ while True:
 	elif cmd[0]=="help":
 		if len(cmd)==1:
 			print("List of commands:")
-			print("exit, help, create, move")
+			print("exit, help, create, move, hold")
+			print("exit\nhelp\ncreate c <name> <type> <place>\ncreate p <place>\ncreate o <object> [nickname]\nmove <character> <place>\nhold <character> [held-item] [hand]\ndrop <character> <hand>")
 		if len(cmd)==2:
 			pass #search for the command name and display information
 
@@ -126,6 +127,57 @@ while True:
 					print(objeect[0])
 		else:
 			print("Invalid list.")
+	elif cmd[0]=="hold":
+		if len(cmd)==1:
+			print("Not enough arguments")
+		elif len(cmd)==2:
+			found=False
+			for character in caracters:
+				if character.name==cmd[1]:
+					found=True
+					print("Left:"+character.helditem[0])
+					print("Right:"+character.helditem[1])
+			if not found:
+				print("Character not found")
+		elif len(cmd)==3:
+			found=False
+			for character in caracters:
+				if character.name==cmd[2]:
+					found=True
+					if character.helditem[1]=="":
+						character.helditem[1]=cmd[3]
+						print("Set held item. (right hand)")
+						log("Gave "+character.name.upper()+" a "+cmd[3]+" in their right hand")
+					elif character.helditem[0]=="":
+						character.helditem[0]=cmd[3]
+						print("Set held item. (left hand)")
+						log("Gave "+character.name.upper()+" a "+cmd[3]+" in their left hand")
+					else:
+						print("Character has no hands free. use the drop command.")
+			if not found:
+				print("Character not found")
+		elif len(cmd)==4:
+			found=False
+			for character in caracters:
+				if character.name==cmd[2]:
+					found=True
+					if cmd[4]=="left" or cmd[4]=="l":
+						if character.helditem[0]=="":
+							character.helditem[0]=cmd[3]
+							print("Done.")
+							log("Gave "+character.name.upper()+" a "+cmd[3]+" in their left hand")
+						else:
+							print("Hand full.")
+					if cmd[4]=="right" or cmd[4]=="r":
+						if character.helditem[1]=="":
+							character.helditem[1]=cmd[3]
+							print("Done.")
+							log("Gave "+character.name.upper()+" a "+cmd[3]+" in their right hand")
+						else:
+							print("Hand full.")
+			if not found:
+				print("Character not found")
+
 print("Shell stopped.")
 print("Saveing..")
 with open(logfile,"w+") as f:
