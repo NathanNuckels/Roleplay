@@ -5,4 +5,12 @@
 Run main.py, then type "info rp" for some information.
 
 
-Note: Code does not currently run.
+- [x] define enough classes to make the code useable
+    - [x] Place
+    - [x] Character
+    - [ ] Object
+- [ ] test 'c' command
+    - [x] places
+    - [ ] characters
+    - [ ] objects
+- [ ] test 'move' command
