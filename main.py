@@ -1,8 +1,24 @@
 #/home/pi/git/roleplay/main.py
 import roleplay
+import os
 caracters=[]
 places=[]
 objects=[]
+logs=[]
+print("Quit anytime by closeing the window its running in or press Ctrl+C\n")
+print("Please enter a log file")
+while True:
+	logfile=input("><> ")
+	if not os.path.exists(logfile):
+		print("TEKNIQ: Ready to create a new file.")
+		break
+	else:
+		print("TEKNIQ: Hey Hey! This file already exists. If you keep going, you will just append to the existing file. Just letting you know.")
+		break
+
+def log(string):
+	global logs
+	logs.append(string+"\n")
 
 print("Shell start. Type \"Help\" for help")
 while True:
@@ -15,6 +31,7 @@ while True:
 			print("exit, help, create, move")
 		if len(cmd)==2:
 			pass #search for the command name and display information
+
 	#create c <name> <type> <place>
 	#example: create Clyde protogen space-station
 	#create p <place-id>
@@ -32,6 +49,7 @@ while True:
 					if place.name==cmd[4]:
 						caracters.append(roleplay.Character(cmd[2],cmd[3],cmd[4]))
 						print("Created "+cmd[2].upper()+" the "+cmd[3].upper()+" at "+cmd[4].upper())
+						log("Created a "+cmd[3].upper()+" named "+cmd[2].upper()+" at "+cmd[4].upper())
 						foundPlace=True
 				if not foundPlace:
 					print("Place not found")
@@ -43,6 +61,7 @@ while True:
 			elif roleplay.isPlace(cmd[2]):
 				places.append(roleplay.Place(cmd[2]))
 				print("Loaded Place "+cmd[2].upper())
+				log("Created place "+cmd[2].upper())
 			else:
 				print("Invalid place-id. Try \"list place-ids\"")
 		elif cmd[1]=="o" or cmd[1]=="object":
@@ -51,8 +70,12 @@ while True:
 			elif roleplay.isObject(cmd[2]):
 				if len(cmd)==3:
 					objects.append([cmd[2],roleplay.Object(cmd[2])])
+					print("Created a "+cmd[2])
+					log("Created a "+cmd[2].upper())
 				else:
 					objects.append([cmd[3],roleplay.Object(cmd[2])])
+					print("Created a "+cmd[2].upper()+" nicknamed "+cmd[3].upper())
+					log("Created a "+cmd[2].upper()+" nicknamed "+cmd[3].upper())
 	elif cmd[0]=="move" or cmd[0]=="mv":
 		if len(cmd)<3:
 			print("Too few arguments.")
@@ -72,6 +95,8 @@ while True:
 				print("Place not found.")
 			else:
 				print("Moved "+cmd[1]+" to "+cmd[2])
+				log("Moved "+cmd[1]+" to "+cmd[2])
+				
 	elif cmd[0]=="list" or cmd[0]=="l":
 		if len(cmd)==1:
 			print("List what?")
@@ -102,3 +127,7 @@ while True:
 		else:
 			print("Invalid list.")
 print("Shell stopped.")
+print("Saveing..")
+with open(logfile,"w+") as f:
+	f.writelines(logs)
+print("done!")
