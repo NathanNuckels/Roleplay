@@ -1,6 +1,6 @@
 types=["protogen"]
 places=["space-station","des"]
-objects=[]
+objects=["sword","gem"]
 
 def isType(type):
 	for validType in types:

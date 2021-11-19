@@ -72,4 +72,33 @@ while True:
 				print("Place not found.")
 			else:
 				print("Moved "+cmd[1]+" to "+cmd[2])
+	elif cmd[0]=="list" or cmd[0]=="l":
+		if len(cmd)==1:
+			print("List what?")
+		elif cmd[1]=="type-ids":
+			for type in roleplay.types:
+				print(type)
+		elif cmd[1]=="place-ids":
+			for place in roleplay.places:
+				print(place)
+		elif cmd[1]=="places" or cmd[1]=="p":
+			if len(places)==0:
+				print("There are no places")
+			else:
+				for place in places:
+					print(place.name)
+		elif cmd[1]=="characters" or cmd[1]=="c":
+			if len(caracters)==0:
+				print("There are no characters.")
+			else:
+				for caracter in caracters:
+					print(caracter.name)
+		elif cmd[1]=="objects" or cmd[1]=="o":
+			if len(objects)==0:
+				print("There are no objects")
+			else:
+				for objeect in objects:
+					print(objeect[0])
+		else:
+			print("Invalid list.")
 print("Shell stopped.")
