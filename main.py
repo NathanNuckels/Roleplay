@@ -83,11 +83,11 @@ while True:
                 print("Too few arguments.")
             elif roleplay.isObject(cmd[2]):
                 if len(cmd) == 3:
-                    objects.append([cmd[2], roleplay.Object(cmd[2])])
+                    objects.append([cmd[2], roleplay.Object(cmd[2]),"",""])
                     print("Created a " + cmd[2])
                     log("Created a " + cmd[2].upper())
                 else:
-                    objects.append([cmd[3], roleplay.Object(cmd[2])])
+                    objects.append([cmd[3], roleplay.Object(cmd[2]),"",""])
                     print("Created a " + cmd[2].upper() + " nicknamed " +
                           cmd[3].upper())
                     log("Created a " + cmd[2].upper() + " nicknamed " +
@@ -142,7 +142,10 @@ while True:
                 print("There are no objects")
             else:
                 for objeect in objects:
-                    print(objeect[0])
+                    if objeect[2]=="":
+                        print(objeect[0])
+                    else:
+                        print(objeect[0]+" (Held by "+objeect[2]+")")
         else:
             print("Invalid list.")
 
@@ -167,11 +170,15 @@ while True:
                     found = True
                     if character.helditem[1] == "":
                         character.helditem[1] = cmd[2]
+                        object[2]=character.name
+                        object[3]="right"
                         print("Set held item. (right hand)")
                         log("Gave " + character.name.upper() + " a " + cmd[2] +
                             " in their right hand")
                     elif character.helditem[0] == "":
                         character.helditem[0] = cmd[2]
+                        object[2]=character.name
+                        object[3]="left"
                         print("Set held item. (left hand)")
                         log("Gave " + character.name.upper() + " a " + cmd[2] +
                             " in their left hand")
@@ -193,7 +200,9 @@ while True:
                                 print(str(object))
                                 if object[0] == cmd[2]:
                                     found2 = True
-                                    character.helditem[0] = cmd[2]
+                                    character.helditem[0] = object[0]
+                                    object[2]=character.name
+                                    object[3]="left"
                                     print("Done.")
                                     log("Gave " + character.name.upper() +
                                         " a " + cmd[2] + " in their left hand")
@@ -206,6 +215,8 @@ while True:
                             for object in objects:
                                 if object[0] == cmd[2]:
                                     character.helditem[1] = cmd[2]
+                                    object[2]=character.name
+                                    object[3]="right"
                                     print("Done.")
                                     log("Gave " + character.name.upper() +
                                         " a " + cmd[2] +
