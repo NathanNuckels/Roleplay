@@ -30,6 +30,7 @@ class Character:
 		self.name=name
 		self.place=place
 		self.type=type
+		self.helditem=["",""]
 
 class Object:
 	def __init__(self,id):
